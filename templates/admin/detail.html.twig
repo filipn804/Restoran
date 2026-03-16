@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation Details{% endblock %}
+
+{% block body %}
+<h1 class="mb-4">Reservation Details</h1>
+
+<ul class="list-group mb-4">
+    <li class="list-group-item"><strong>Reference:</strong> {{ reservation.referenceCode }}</li>
+    <li class="list-group-item"><strong>Full Name:</strong> {{ reservation.fullName }}</li>
+    <li class="list-group-item"><strong>Email:</strong> {{ reservation.email }}</li>
+    <li class="list-group-item"><strong>Phone:</strong> {{ reservation.phone }}</li>
+    <li class="list-group-item"><strong>Date:</strong> {{ reservation.date|date('Y-m-d') }}</li>
+    <li class="list-group-item"><strong>Time:</strong> {{ reservation.time|date('H:i') }}</li>
+    <li class="list-group-item"><strong>Party Size:</strong> {{ reservation.partySize }}</li>
+    <li class="list-group-item"><strong>Private Dining:</strong> {{ reservation.privateDining ? 'Yes' : 'No' }}</li>
+    <li class="list-group-item"><strong>Special Requests:</strong> {{ reservation.specialRequest ?: 'None' }}</li>
+    <li class="list-group-item"><strong>Status:</strong> {{ reservation.status }}</li>
+    <li class="list-group-item"><strong>Created At:</strong> {{ reservation.createdAt|date('Y-m-d H:i') }}</li>
+</ul>
+
+<h4 class="mb-3">Update Status</h4>
+<form method="post">
+    <div class="mb-3">
+        <select name="status" class="form-select">
+            <option value="Pending" {% if reservation.status == 'Pending' %}selected{% endif %}>Pending</option>
+            <option value="Confirmed" {% if reservation.status == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+            <option value="Cancelled" {% if reservation.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+            <option value="Completed" {% if reservation.status == 'Completed' %}selected{% endif %}>Completed</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Update Status</button>
+    <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">Back</a>
+</form>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation Confirmed{% endblock %}
+
+{% block body %}
+<h1>Reservation Confirmed</h1>
+
+<p>Thank you, {{ reservation.fullName }}!</p>
+<p>Your reservation details:</p>
+<ul>
+    <li>Email: {{ reservation.email }}</li>
+    <li>Phone: {{ reservation.phone }}</li>
+    <li>Date: {{ reservation.date|date('Y-m-d') }}</li>
+    <li>Time: {{ reservation.time|date('H:i') }}</li>
+    <li>Party Size: {{ reservation.partySize }}</li>
+    <li>Private Dining: {{ reservation.privateDining ? 'Yes' : 'No' }}</li>
+    <li>Status: {{ reservation.status }}</li>
+    <li>Reference Code: {{ reservation.referenceCode }}</li>
+    <li>Created At: {{ reservation.createdAt|date('Y-m-d H:i') }}</li>
+    {% if reservation.specialRequest %}
+        <li>Special Request: {{ reservation.specialRequest }}</li>
+    {% endif %}
+</ul>
+
+<a href="{{ path('reservation_form') }}" class="btn btn-secondary">Make Another Reservation</a>
+{% endblock %}

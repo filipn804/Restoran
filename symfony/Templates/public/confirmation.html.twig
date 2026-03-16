@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="card p-4 text-center">
+
+<h3>Reservation Confirmed</h3>
+
+<h2 class="text-success">
+{{ reservation.referenceCode }}
+</h2>
+
+<p>
+{{ reservation.date|date("Y-m-d") }}
+{{ reservation.time|date("H:i") }}
+</p>
+
+</div>
+
+{% endblock %}

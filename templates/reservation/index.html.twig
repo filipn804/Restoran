@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Make a Reservation{% endblock %}
+
+{% block body %}
+<h1 class="mb-4">Make a Reservation</h1>
+
+{{ form_start(form) }}
+<div class="row g-3">
+    <div class="col-md-6">{{ form_row(form.fullName) }}</div>
+    <div class="col-md-6">{{ form_row(form.email) }}</div>
+    <div class="col-md-6">{{ form_row(form.phone) }}</div>
+    <div class="col-md-6">{{ form_row(form.date) }}</div>
+    <div class="col-md-6">{{ form_row(form.time) }}</div>
+    <div class="col-md-6">{{ form_row(form.partySize) }}</div>
+    <div class="col-12">{{ form_row(form.specialRequest) }}</div>
+    <div class="col-12">{{ form_row(form.privateDining) }}</div>
+</div>
+<div class="mt-3">
+    <button type="submit" class="btn btn-primary">Submit Reservation</button>
+</div>
+{{ form_end(form) }}
+{% endblock %}

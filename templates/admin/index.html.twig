@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block body %}
+<h1 class="mb-4">Admin Dashboard</h1>
+
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-4">
+        <input type="date" name="date" value="{{ dateFilter }}" class="form-control" placeholder="Filter by date">
+    </div>
+    <div class="col-md-4">
+        <select name="status" class="form-select">
+            <option value="">All Statuses</option>
+            <option value="Pending" {% if statusFilter == 'Pending' %}selected{% endif %}>Pending</option>
+            <option value="Confirmed" {% if statusFilter == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+            <option value="Cancelled" {% if statusFilter == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+            <option value="Completed" {% if statusFilter == 'Completed' %}selected{% endif %}>Completed</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">Reset</a>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Guest</th>
+                <th>Party Size</th>
+                <th>Status</th>
+                <th>Private Dining</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.referenceCode }}</td>
+                    <td>{{ reservation.date|date('Y-m-d') }}</td>
+                    <td>{{ reservation.time|date('H:i') }}</td>
+                    <td>{{ reservation.fullName }}</td>
+                    <td>{{ reservation.partySize }}</td>
+                    <td>{{ reservation.status }}</td>
+                    <td>{{ reservation.privateDining ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <a href="{{ path('admin_reservation_detail', {id: reservation.id}) }}" class="btn btn-sm btn-info">View / Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8" class="text-center">No reservations found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<p><strong>Total Guests Today:</strong> {{ totalGuests }}</p>
+{% endblock %}

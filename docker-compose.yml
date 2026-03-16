@@ -1,0 +1,33 @@
+
+
+services:
+  app:
+    build: .
+    container_name: symfony_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/srv/app
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "mysql://symfony:symfony@db:3306/restaurant?serverVersion=8.0"
+      DEFAULT_URI: "http://localhost:8000"
+    command: php -S 0.0.0.0:8000 -t public
+
+  db:
+    image: mysql:8.0
+    container_name: symfony_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: restaurant
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: symfony
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

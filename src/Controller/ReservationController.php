@@ -39,19 +39,19 @@ class ReservationController extends AbstractController
 
             $now = new \DateTime();
 
-                // Kombiniraj datum i vrijeme u jednu instancu
+               
                 $reservationDateTime = \DateTime::createFromFormat(
                     'Y-m-d H:i',
                     $date->format('Y-m-d') . ' ' . $time->format('H:i')
                 );
 
-                // Zatvaranje kuhinje u 21:00 istog dana
+               
                 $closingTime = \DateTime::createFromFormat(
                     'Y-m-d H:i',
                     $date->format('Y-m-d') . ' 21:00'
                 );
 
-                // Provjera: ako je rezervacija u prošlosti ili nakon zatvaranja
+              
                 if ($reservationDateTime >= $closingTime || $reservationDateTime < $now) {
                     $this->addFlash('error', 'Cannot place a reservation after kitchen closing hours (21:00) or in the past.');
                     return $this->render('reservation/index.html.twig', [

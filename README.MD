@@ -16,7 +16,7 @@ Ovo je web aplikacija za rezervacije restorana napravljena u **Symfony 6** s **D
 
 1. Clone repozitorij:
 ```bash
-git clone <repo-url>
+git clone https://github.com/filipn804/Restoran
 cd restaurant-reservation-app
 
 2.Pokreni docker
